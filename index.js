@@ -8,6 +8,14 @@ import morgan from 'morgan';
 import cors from 'cors'
 //const cors = require('cors');
 import path from 'path';
+import mongoose from 'mongoose';
+
+//conexion a la base de datos MongoDB
+mongoose.Promise = global.Promise;
+const dbUrl = 'mongodb://localhost:27017/dbsistema';
+mongoose.connect(dbUrl, {useNewUrlParser: true, useCreateIndex:true, useUnifiedTopology: true})
+.then(mongoose => console.log('Conectando a la BD en el puerto 27017'))
+.catch(err => console.log(err));
 
 const app=express();
 app.use(morgan('dev'));
