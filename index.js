@@ -1,8 +1,12 @@
-const express=require('express');
+//ES5 -> ES6
+import express from 'express';
+//const express=require('express');
 //morgan: administrar peticiones desde el servidor o cliente
-const morgan = require('morgan');
+import morgan from 'morgan';
+//const morgan = require('morgan');
 //cors: permite recibir solicitudes remotas, no solo desde la misma PC
-const cors = require('cors');
+import cors from 'cors'
+//const cors = require('cors');
 
 const app=express();
 app.use(morgan('dev'));
