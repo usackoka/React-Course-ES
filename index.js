@@ -12,6 +12,7 @@ import mongoose from 'mongoose';
 
 //conexion a la base de datos MongoDB
 mongoose.Promise = global.Promise;
+//la base de datos dbsistema se creara automaticamente cuando se empiecen a crear los modelos de datos
 const dbUrl = 'mongodb://localhost:27017/dbsistema';
 mongoose.connect(dbUrl, {useNewUrlParser: true, useCreateIndex:true, useUnifiedTopology: true})
 .then(mongoose => console.log('Conectando a la BD en el puerto 27017'))
