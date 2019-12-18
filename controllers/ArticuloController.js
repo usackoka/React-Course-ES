@@ -1,5 +1,4 @@
 import models from '../models';
-import { model } from 'mongoose';
 
 export default{
     add: async (req, res, next) => {
@@ -15,7 +14,7 @@ export default{
     },
     query: async (req, res, next) => {
         try {
-            const reg = await model.Articulo.findOne({_id:req.query._id})
+            const reg = await models.Articulo.findOne({_id:req.query._id})
            .populate('categoria',{nombre:1});
             if(!reg){
                 res.status(404).send({

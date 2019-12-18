@@ -1,6 +1,5 @@
 //todos los modelos de models
 import models from '../models';
-import { model } from 'mongoose';
 
 export default{
     //agregar una categoria
