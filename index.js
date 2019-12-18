@@ -9,6 +9,8 @@ import cors from 'cors'
 //const cors = require('cors');
 import path from 'path';
 import mongoose from 'mongoose';
+//para gestion de rutas
+import router from './routes'
 
 //conexion a la base de datos MongoDB
 mongoose.Promise = global.Promise;
@@ -28,6 +30,8 @@ app.use(express.urlencoded({extended:true}));
 
 //ruta de los archivos estaticos
 app.use(express.static(path.join(__dirname,'public')));
+//aqui viene la gestion de rutas
+app.use('/api',router)
 
 //para cuando se despliegue la aplicacion, reciba el puerto asignado automaticamente por el servidor
 //de lo contrario toma el puerto por defecto 3000

@@ -2,7 +2,7 @@ import mongoose, {Schema} from 'mongoose';
 
 //esquema del modelo
 const categoriaSchema = new Schema({
-    nombre:{type:String, maxlength, maxlength:50, unique:true, required:true},
+    nombre:{type:String, maxlength:50, unique:true, required:true},
     descripcion:{type:String, maxlength:255},
     estado:{type:Number, default:1},
     createdAt:{type:Date, default:Date.now}
