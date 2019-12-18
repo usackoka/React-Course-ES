@@ -10,5 +10,6 @@ router.put('/update',UsuarioController.update);
 router.delete('/remove',UsuarioController.remove);
 router.put('/activate',UsuarioController.activate);
 router.put('/deactivate',UsuarioController.deactivate);
+router.post('/login',UsuarioController.login);
 
 export default router;
