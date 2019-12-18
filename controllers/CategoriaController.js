@@ -14,7 +14,7 @@ export default{
             //req a traves de ajax
             const reg = await models.Categoria.create(req.body);
             res.status(200).json(reg);
-        } catch (error) {
+        } catch (e) {
             res.status(500).send({
                 message: 'Ocurrio un error'
             });
@@ -34,7 +34,7 @@ export default{
             }else{
                 res.status(200).json(reg);
             }
-        } catch (error) {
+        } catch (e) {
             res.status(500).send({
                 message: 'Ocurrio un error'
             });
@@ -44,7 +44,35 @@ export default{
     //listarlos
     list: async (req, res, next) => {
         try {
-            const reg = await models.Categoria.find({});
+            //find all
+            //const reg = await models.Categoria.find({});
+
+            //me indica que va a buscar todos pero no me va a mostrar las propiedades
+            //createAt y descripcion
+            //const reg = await models.Categoria.find({},{createdAt:0,descripcion:0});
+            
+            //me indica que va a buscar todos pero solo me mostrara la propiedad nombre
+            //const reg = await models.Categoria.find({},{nombre:1});
+
+            //encuentra todas las categorias que tengan el nombre que se manda como parametro
+            /*
+            let valor = req.query.valor;
+            const reg = await models.Categoria.find({'nombre':new RegExp(valor,'i')},{createAt:0})
+            .sort({'createdAt':-1});
+            */
+
+           let valor = req.query.valor;
+           const reg = await models.Categoria.find({
+               $or:[
+                   {'nombre':new RegExp(valor,'i')},
+                   {'descripcion':new RegExp(valor,'i')}
+                ]
+                },{createAt:0})
+           .sort({'createdAt':-1});
+
+            //ordenar de forma descendente por el campo nombre
+            //.sort({'nombre':-1});
+
             res.status(200).json(reg);
         } catch (error) {
             res.status(500).send({
@@ -70,7 +98,7 @@ export default{
                 });
                 //its ok!, regreso el reg mediante json
                 resizeTo.status(200).json(reg);
-        } catch (error) {
+        } catch (e) {
             res.status(500).send({
                 message: 'Ocurrio un error'
             });
@@ -98,7 +126,7 @@ export default{
                 estado:1
             });
             res.status(200).jes(reg);
-        } catch (error) {
+        } catch (e) {
             res.status(500).send({
                 message: 'Ocurrio un error'
             });
@@ -114,7 +142,7 @@ export default{
                 estado:0
             });
             res.status(200).jes(reg);
-        } catch (error) {
+        } catch (e) {
             res.status(500).send({
                 message: 'Ocurrio un error'
             });
