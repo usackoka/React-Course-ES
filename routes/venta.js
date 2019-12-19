@@ -14,4 +14,6 @@ router.delete('/remove',auth.verifyAlmacenero,VentaController.remove);
 router.put('/activate',auth.verifyVendedor,VentaController.activate);
 router.put('/deactivate',auth.verifyVendedor,VentaController.deactivate);
 
+router.get('/grafico12meses', auth.verifyUsuario, VentaController.grafico12Meses);
+
 export default router;
