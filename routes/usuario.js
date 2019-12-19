@@ -1,15 +1,16 @@
 import routerx from 'express-promise-router';
 import UsuarioController from '../controllers/UsuarioController';
+import auth from '../middlewares/auth'
 
 const router=routerx();
 
-router.post('/add',UsuarioController.add);
-router.get('/query',UsuarioController.query);
-router.get('/list',UsuarioController.list);
-router.put('/update',UsuarioController.update);
-router.delete('/remove',UsuarioController.remove);
-router.put('/activate',UsuarioController.activate);
-router.put('/deactivate',UsuarioController.deactivate);
+router.post('/add',auth.verifyAdministrador,UsuarioController.add);
+router.get('/query',auth.verifyAdministrador,UsuarioController.query);
+router.get('/list',auth.verifyAdministrador,UsuarioController.list);
+router.put('/update',auth.verifyAdministrador,UsuarioController.update);
+router.delete('/remove',auth.verifyAdministrador,UsuarioController.remove);
+router.put('/activate',auth.verifyAdministrador,UsuarioController.activate);
+router.put('/deactivate',auth.verifyAdministrador,UsuarioController.deactivate);
 router.post('/login',UsuarioController.login);
 
 export default router;
