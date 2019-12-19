@@ -1,5 +1,7 @@
 import models from '../models';
 import bcrypt from 'bcryptjs';
+import token from '../services/token'
+
 export default {
     add: async (req,res,next) =>{
         try {
@@ -34,7 +36,10 @@ export default {
     list: async (req,res,next) => {
         try {
             let valor=req.query.valor;
-            const reg=await models.Usuario.find({$or:[{'nombre':new RegExp(valor,'i')},{'email':new RegExp(valor,'i')}]},{createdAt:0})
+            const reg=await models.Usuario.find({
+                $or:[
+                    {'nombre':new RegExp(valor,'i')},
+                    {'email':new RegExp(valor,'i')}]},{createdAt:0})
             .sort({'createdAt':-1});
             res.status(200).json(reg);
         } catch(e){
@@ -112,9 +117,8 @@ export default {
             if (user){
                 let match = await bcrypt.compare(req.body.password,user.password);
                 if (match){
-                    //let tokenReturn = await token.encode(user._id);
-                    //res.status(200).json({user,tokenReturn});
-                    res.json('Password Correcto!');
+                    let tokenReturn = await token.encode(user._id);
+                    res.status(200).json({user,tokenReturn});
                 } else{
                     res.status(404).send({
                         message: 'Password Incorrecto'
