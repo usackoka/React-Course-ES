@@ -1,4 +1,5 @@
 import models from '../models';
+
 async function aumentarStock(idarticulo,cantidad){
     let {stock}=await models.Articulo.findOne({_id:idarticulo});
     let nStock=parseInt(stock)+parseInt(cantidad);
